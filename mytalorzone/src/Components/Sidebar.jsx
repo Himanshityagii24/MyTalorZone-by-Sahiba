@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import CrownIcon from '../Assets/Crown.png';
 import UserIcon from '../Assets/user.png';
-import { dresses } from '../Pages/dresses';
+
  // Import the user icon image
 
 export const Sidebar = () => {
@@ -14,8 +14,11 @@ export const Sidebar = () => {
       </div>
       
       <ul className="space-y-4 flex-grow px-4">
+      <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4">
+          <a href="/landingpage" className="block">Home</a>
+        </li>
         <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4">
-          <a href="#dresses" className="block">Dresses</a>
+          <a href="/dress" className="block">Dresses</a>
         </li>
         <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4">
           <a href="#blouses" className="block">Blouses</a>
@@ -29,14 +32,12 @@ export const Sidebar = () => {
         <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4">
           <a href="#trousers" className="block">Trousers</a>
         </li>
-        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4">
-          <a href="#accessories" className="block">Accessories</a>
-        </li>
+       
       </ul>
       
       <ul className="px-4 pb-4">
         <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4">
-          <a href="#cart" className="block">Cart</a>
+          <a href="/cart" className="block">Cart</a>
         </li>
         <li className="text-lg text-black hover:bg-pink-300 hover:rounded-lg py-2 px-4">
           <a href="#orders" className="block">Orders</a>

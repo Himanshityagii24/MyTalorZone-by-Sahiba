@@ -8,6 +8,7 @@ import Login from './Pages/Login';
 import SellerDashboard from './Pages/SellerDashboard';
 import SellPage from './Pages/SellPage';
 import Dress from './Pages/dresses';
+import Cart from './Pages/cart';
 
 function App() {
   return (
@@ -18,7 +19,9 @@ function App() {
         <Route path="/signupseller" element={<SignupSeller />} />
         <Route path="/signupuser" element={<SignupUser />} />
         <Route path="/sellpage" element={ <SellPage/>} />
-        <Route path="/dresses" element={ <Dress/>} />         
+        <Route path="/dress" element={ <Dress/>} />  
+        <Route path="/cart" element={ <Cart/>} />         
+       
         <Route path="/sellerdashboard" element={<SellerDashboard />} />
         <Route path="/login" element={<Login />} />
       </Routes>
