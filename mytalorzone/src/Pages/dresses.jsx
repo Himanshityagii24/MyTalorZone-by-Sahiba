@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sidebar } from '../Components/Sidebar';
 import bg1 from '../Assets/bg1.jpeg';
 import cartIcon from '../Assets/pink-cart.png';
@@ -99,6 +99,10 @@ const DressContent = () => {
     { img: dress6, name: 'Dress 6', price: '$99.99' },
   ];
 
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
+
   return (
     <div
       className="flex relative"
@@ -126,7 +130,7 @@ const DressContent = () => {
         onClick={toggleModal}
       >
         <span className="text-pink-500 font-caveat text-6xl mb-4 text-center select-none">
-          Add your items here!
+          Drag and drop your items here!
         </span>
         <img
           src={cartIcon}
@@ -134,7 +138,7 @@ const DressContent = () => {
           className="cursor-pointer pointer-events-none"
           style={{ width: '100%', height: '70%' }}
         />
-         <span className="text-pink-500 font-caveat text-4xl mb-4 text-center select-none">
+        <span className="text-pink-500 font-caveat text-4xl mb-4 text-center select-none">
           Click on Cart to view your items!
         </span>
         {emojiEffect && <span className="text-6xl">✅</span>}
@@ -143,7 +147,7 @@ const DressContent = () => {
       <Modal
         isOpen={isModalOpen}
         closeModal={toggleModal}
-        cartItems={cartItems} // Correctly pass cartItems here
+        cartItems={cartItems}
       />
     </div>
   );
