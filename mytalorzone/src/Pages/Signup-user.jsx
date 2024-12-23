@@ -12,43 +12,15 @@ const SignupUser = () => {
     phone: '',
   });
 
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    setIsLoading(true);
-    setErrorMessage(''); // Reset error message before making the request
-
-    try {
-      const response = await fetch('https://my-talor-zone-by-sahiba-ldas.vercel.app/api/users/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        // Successfully signed up, navigate to the landing page
-        navigate('/landingpage');
-      } else {
-        // Handle errors, if any
-        setErrorMessage(data.message || 'An error occurred. Please try again later.');
-      }
-    } catch (error) {
-      setErrorMessage('An error occurred. Please try again later.');
-    } finally {
-      setIsLoading(false);
-    }
+    // Directly navigate to the landing page
+    navigate('/landingpage');
   };
 
   return (
@@ -120,18 +92,12 @@ const SignupUser = () => {
               required
             />
 
-            {/* Error Message */}
-            {errorMessage && (
-              <p className="text-red-500 text-sm">{errorMessage}</p>
-            )}
-
             {/* Submit Button */}
             <button
               type="submit"
               className="bg-pink-300 text-white font-bold py-3 px-6 rounded w-full hover:bg-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300"
-              disabled={isLoading}
             >
-              {isLoading ? 'Signing up...' : 'Signup'}
+              Signup
             </button>
           </form>
 

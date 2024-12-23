@@ -1,12 +1,22 @@
 import React from 'react'
 import { Sidebar } from '../Components/Sidebar'
+import bgImage from '../Assets/bg1.jpeg'
 
-const cart = () => {
+const Cart = () => {
   return (
-    <div>
-      <Sidebar/>
+    <div style={{ 
+      display: 'flex', 
+      backgroundImage: `url(${bgImage})`, 
+      backgroundSize: '50%', 
+      backgroundPosition: 'center', 
+      height: '100vh' 
+    }}>
+      <Sidebar />
+      <div style={{ flex: 1 }}>
+        {/* Your content goes here */}
+      </div>
     </div>
   )
 }
 
-export default cart
+export default Cart;
