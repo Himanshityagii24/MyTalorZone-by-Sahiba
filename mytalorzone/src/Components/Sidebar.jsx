@@ -45,9 +45,7 @@ export const Sidebar = () => {
       </ul>
       
       <ul className="px-4 pb-4">
-        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4">
-          <a href="#cart" onClick={openModal} className="block">Cart</a>
-        </li>
+       
         <li className="text-lg text-black hover:bg-pink-300 hover:rounded-lg py-2 px-4">
           <a href="#orders" className="block">Orders</a>
         </li>

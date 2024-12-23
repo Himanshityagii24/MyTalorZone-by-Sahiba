@@ -10,7 +10,7 @@ import dress5 from '../Assets/dress5.jpeg';
 import dress6 from '../Assets/dress6.jpeg';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import Modal from '../Components/Modal';  
+import Modal from '../Components/Modal';
 
 // DraggableCard Component
 const DraggableCard = ({ dress }) => {
@@ -44,7 +44,7 @@ const DraggableCard = ({ dress }) => {
 };
 
 const DressContent = () => {
-  const [cartItems, setCartItems] = useState([]);  
+  const [cartItems, setCartItems] = useState([]);
   const [emojiEffect, setEmojiEffect] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -69,9 +69,9 @@ const DressContent = () => {
     accept: 'DRESS',
     drop: (item) => {
       console.log('Item dropped:', item);
-      if (!cartItems.includes(item.name)) {
+      if (!cartItems.some((cartItem) => cartItem.name === item.name)) {
         setCartItems((prevItems) => {
-          const updatedItems = [...prevItems, item.name];
+          const updatedItems = [...prevItems, item];
           console.log('Updated cart items:', updatedItems);
           return updatedItems;
         });
@@ -134,14 +134,16 @@ const DressContent = () => {
           className="cursor-pointer pointer-events-none"
           style={{ width: '100%', height: '70%' }}
         />
+         <span className="text-pink-500 font-caveat text-4xl mb-4 text-center select-none">
+          Click on Cart to view your items!
+        </span>
         {emojiEffect && <span className="text-6xl">✅</span>}
       </div>
 
-      {/* Pass the cart items correctly to the Modal */}
       <Modal
         isOpen={isModalOpen}
         closeModal={toggleModal}
-        cartItems={cartItems}  // Correctly pass cartItems here
+        cartItems={cartItems} // Correctly pass cartItems here
       />
     </div>
   );
