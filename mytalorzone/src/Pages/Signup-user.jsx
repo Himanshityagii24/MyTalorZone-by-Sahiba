@@ -12,16 +12,43 @@ const SignupUser = () => {
     phone: '',
   });
 
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('User Signup Data:', formData);
-    // Add your signup logic here, e.g., API call
-    navigate('/landingpage'); // Navigate to the landing page or next step after signup
+
+    setIsLoading(true);
+    setErrorMessage(''); // Reset error message before making the request
+
+    try {
+      const response = await fetch('https://my-talor-zone-by-sahiba-ldas.vercel.app/api/users/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Successfully signed up, navigate to the landing page
+        navigate('/landingpage');
+      } else {
+        // Handle errors, if any
+        setErrorMessage(data.message || 'An error occurred. Please try again later.');
+      }
+    } catch (error) {
+      setErrorMessage('An error occurred. Please try again later.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -45,9 +72,7 @@ const SignupUser = () => {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl font-[Caveat] text-black mt-12 mb-10">
-            MyTailorZone
-          </h1>
+          <h1 className="text-4xl font-[Caveat] text-black mt-12 mb-10">MyTailorZone</h1>
 
           {/* Signup Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -95,12 +120,18 @@ const SignupUser = () => {
               required
             />
 
+            {/* Error Message */}
+            {errorMessage && (
+              <p className="text-red-500 text-sm">{errorMessage}</p>
+            )}
+
             {/* Submit Button */}
             <button
               type="submit"
               className="bg-pink-300 text-white font-bold py-3 px-6 rounded w-full hover:bg-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300"
+              disabled={isLoading}
             >
-              Signup 
+              {isLoading ? 'Signing up...' : 'Signup'}
             </button>
           </form>
 
