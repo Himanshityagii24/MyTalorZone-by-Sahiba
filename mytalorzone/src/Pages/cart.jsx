@@ -13,7 +13,7 @@ const Cart = () => {
     }}>
       <Sidebar />
       <div style={{ flex: 1 }}>
-        {/* Your content goes here */}
+       
       </div>
     </div>
   )

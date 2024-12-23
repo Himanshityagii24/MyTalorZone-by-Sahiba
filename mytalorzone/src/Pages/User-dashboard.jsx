@@ -7,14 +7,14 @@ import banner4 from '../Assets/banner4.jpeg';
 import banner5 from '../Assets/banner5.jpeg';
 import banner6 from '../Assets/Shein Banner.jpeg';
 import pink from '../Assets/pink.jpeg';
-import green from '../Assets/green.jpeg'; 
-import black from '../Assets/black.jpeg'; 
-import denim1 from '../Assets/denim1.jpeg'; 
-import denim2 from '../Assets/denim2.jpeg'; 
-import denim3 from '../Assets/denim3.jpeg'; 
+import green from '../Assets/green.jpeg';
+import black from '../Assets/black.jpeg';
+import denim1 from '../Assets/denim1.jpeg';
+import denim2 from '../Assets/denim2.jpeg';
+import denim3 from '../Assets/denim3.jpeg';
 import season1 from '../Assets/season1.jpeg';
-import season2 from '../Assets/season2.jpeg'; 
-import season4 from '../Assets/season4.jpeg'; 
+import season2 from '../Assets/season2.jpeg';
+import season4 from '../Assets/season4.jpeg';
 
 const banners = [Banner, Bangif, banner3, banner4, banner5, banner6];
 
@@ -23,6 +23,7 @@ const LandingPage = () => {
   const [activeSection, setActiveSection] = useState(0);
   const [images, setImages] = useState([pink, green, black]); // Initial images for "Shop By Color Theme"
   const [fade, setFade] = useState(false); // For smooth transitions
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const sections = ['Shop By Color Theme', 'Shop Denim', 'Shop By Season'];
 
@@ -53,12 +54,55 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="flex">
-      {/* Sidebar */}
-      <Sidebar />
+    <div className="flex flex-col lg:flex-row">
+      {/* Sidebar for larger screens */}
+      <div className="hidden lg:block">
+        <Sidebar />
+      </div>
+
+      {/* Sidebar for smaller screens */}
+      <div className={`lg:hidden ${isMenuOpen ? 'block' : 'hidden'} fixed inset-0 bg-gray-800 bg-opacity-50 z-50`}>
+        <Sidebar />
+      </div>
+
+      {/* Menu bar for smaller screens */}
+      <div className="lg:hidden bg-gray-800 text-white px-4 py-2 flex justify-between items-center">
+        <h2
+          className="text-3xl font-semibold text-gray-100"
+          style={{ fontFamily: 'Caveat' }}
+        >
+          MyTalorZone
+        </h2>
+
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="text-white focus:outline-none"
+        >
+          {isMenuOpen ? 'Close' : 'Open'}
+        </button>
+      </div>
+
+      {isMenuOpen && (
+        <div className="lg:hidden bg-gray-100 text-gray-800 p-4">
+          <ul>
+            {sections.map((section, index) => (
+              <li
+                key={index}
+                className="py-2 cursor-pointer hover:text-gray-500"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  handleSectionChange(index);
+                }}
+              >
+                {section}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Main Content */}
-      <div className="flex-1 overflow-hidden ml-64">
+      <div className="flex-1 overflow-hidden lg:ml-64 px-4">
         {/* Banner Carousel */}
         <div className="w-full">
           <div
@@ -153,13 +197,13 @@ const LandingPage = () => {
             fade ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {images.map((image, index) => (
               <div key={index}>
                 <img
                   src={image}
                   alt={`Image ${index + 1}`}
-                  className="w-full h-[500px] object-cover shadow-md"
+                  className="w-full h-[300px] lg:h-[500px] object-cover shadow-md"
                 />
               </div>
             ))}

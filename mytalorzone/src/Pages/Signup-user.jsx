@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import * as ReactRouter from 'react-router-dom';
+import axios from 'axios'; 
 import LoginImage from '../Assets/LoginImage.jpeg';
 import CrownIcon from '../Assets/Crown.png';
 
@@ -12,15 +13,36 @@ const SignupUser = () => {
     phone: '',
   });
 
+  const [error, setError] = useState(null);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Directly navigate to the landing page
-    navigate('/landingpage');
+    const requestBody = {
+      name: formData.name,
+      email: formData.email,
+      phoneNumber: formData.phone,
+      password: formData.password,
+    };
+
+    try {
+      const response = await axios.post(
+        'https://my-talor-zone-by-sahiba-ldas.vercel.app/api/users/signup',
+        requestBody
+      );
+      console.log('Signup successful:', response.data);
+      // Navigate to the landing page after successful signup
+      navigate('/landingpage');
+    } catch (error) {
+      console.error('Signup failed:', error);
+      setError(
+        error.response?.data?.message || 'An error occurred. Please try again.'
+      );
+    }
   };
 
   return (
@@ -91,6 +113,9 @@ const SignupUser = () => {
               placeholder="Enter your phone number"
               required
             />
+
+            {/* Error Message */}
+            {error && <p className="text-red-500 text-sm">{error}</p>}
 
             {/* Submit Button */}
             <button
