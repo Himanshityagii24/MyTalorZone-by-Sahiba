@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Modal = ({ isOpen, closeModal, cartItems = [] }) => {
   const [quantities, setQuantities] = useState(
@@ -13,13 +13,18 @@ const Modal = ({ isOpen, closeModal, cartItems = [] }) => {
   };
 
   const calculateTotalPrice = () => {
-    return cartItems
-      .reduce((total, item) => {
-        const price = parseFloat(item.price.replace('$', ''));
-        const quantity = quantities[item.name] || 1;
-        return total + price * quantity;
-      }, 0)
-      .toFixed(2);
+    const total = cartItems.reduce((total, item) => {
+      const price = parseFloat(item.price.replace("$", ""));
+      const quantity = quantities[item.name] || 1;
+      return total + price * quantity;
+    }, 0);
+
+    return total.toFixed(2);
+  };
+
+  const handleBuyNow = () => {
+    // Add your "Buy Now" functionality here, such as navigating to a checkout page
+    alert("Proceeding to purchase!");
   };
 
   if (!isOpen) return null;
@@ -27,7 +32,7 @@ const Modal = ({ isOpen, closeModal, cartItems = [] }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96 relative">
-        <h2 className="text-2xl  justify-center font-caveat mb-4">Cart Items</h2>
+        <h2 className="text-2xl justify-center font-caveat mb-4">Cart Items</h2>
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-black text-xl"
           onClick={closeModal}
@@ -40,7 +45,10 @@ const Modal = ({ isOpen, closeModal, cartItems = [] }) => {
           <>
             <ul className="mb-4">
               {cartItems.map((item, index) => (
-                <li key={index} className="flex items-center justify-between mb-4">
+                <li
+                  key={index}
+                  className="flex items-center justify-between mb-4"
+                >
                   <img
                     src={item.img}
                     alt={item.name}
@@ -56,7 +64,9 @@ const Modal = ({ isOpen, closeModal, cartItems = [] }) => {
                       >
                         -
                       </button>
-                      <span className="mx-2 text-lg">{quantities[item.name] || 1}</span>
+                      <span className="mx-2 text-lg">
+                        {quantities[item.name] || 1}
+                      </span>
                       <button
                         className="px-2 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300"
                         onClick={() => handleQuantityChange(item.name, 1)}
@@ -70,8 +80,16 @@ const Modal = ({ isOpen, closeModal, cartItems = [] }) => {
             </ul>
             <div className="flex justify-between items-center border-t pt-4">
               <span className="text-lg font-semibold">Total:</span>
-              <span className="text-lg font-bold text-pink-500">${calculateTotalPrice()}</span>
+              <span className="text-lg font-bold text-pink-500">
+                ${calculateTotalPrice()}
+              </span>
             </div>
+            <button
+              className="mt-4 w-full px-4 py-2 bg-pink-400 font-caveat text-white rounded hover:bg-pink-500"
+              onClick={handleBuyNow}
+            >
+              Buy Now
+            </button>
           </>
         )}
       </div>

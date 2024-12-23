@@ -1,9 +1,9 @@
-// Sidebar.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { FaHome, FaTshirt, FaFemale, FaMale, FaShoppingCart, FaBoxOpen } from 'react-icons/fa'; // Import icons
+import { BiUserCircle } from 'react-icons/bi'; // Another icon example
 import CrownIcon from '../Assets/Crown.png';
-import UserIcon from '../Assets/user.png';
-import Modal from './Modal'; 
+import Modal from './Modal';
 
 export const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,29 +24,32 @@ export const Sidebar = () => {
       </div>
       
       <ul className="space-y-4 flex-grow px-4">
-        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4">
+        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4 flex items-center">
+          <FaHome className="mr-2" />
           <a href="/landingpage" className="block">Home</a>
         </li>
-        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4">
+        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4 flex items-center">
+          <FaTshirt className="mr-2" />
           <a href="/dress" className="block">Dresses</a>
         </li>
-        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4">
+        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4 flex items-center">
+          <FaFemale className="mr-2" />
           <a href="#blouses" className="block">Blouses</a>
         </li>
-        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4">
+        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4 flex items-center">
+          <FaMale className="mr-2" />
           <a href="#shirts" className="block">Shirts</a>
         </li>
-        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4">
+        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4 flex items-center">
+          <FaShoppingCart className="mr-2" />
           <a href="#denim" className="block">Denim</a>
         </li>
-        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-3xl py-2 px-4">
-          <a href="#trousers" className="block">Trousers</a>
-        </li>
+       
       </ul>
       
       <ul className="px-4 pb-4">
-       
-        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-lg py-2 px-4">
+        <li className="text-lg text-black hover:bg-pink-300 hover:rounded-lg py-2 px-4 flex items-center">
+          <FaBoxOpen className="mr-2" />
           <a href="#orders" className="block">Orders</a>
         </li>
       </ul>
@@ -55,7 +58,7 @@ export const Sidebar = () => {
         <ul className="px-4 pb-4">
           <li className="text-lg text-black bg-pink-300 hover:bg-pink-400 hover:rounded-3xl py-2 px-4 rounded-3xl flex items-center justify-center">
             <Link to="#profile" className="block text-white flex items-center">
-              <img src={UserIcon} alt="User" className="h-6 w-6 mr-2" />
+              <BiUserCircle className="h-6 w-6 mr-2" />
               Profile
             </Link>
           </li>
